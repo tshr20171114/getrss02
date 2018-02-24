@@ -21,6 +21,13 @@ if ($rc === 1) {
   error_log($jump_url3);
   header('Location: ' . $jump_url3);
 } else {
+  $rc = preg_match(getenv('PATTERN2'), $res, $matches);
+  if ($rc === 1) {
+    $jump_url3 = $matches[1];
+    error_log($jump_url3);
+    header('Location: ' . $jump_url3);
+  } else {
   header('Location: ' . $jump_url2);
+  }
 }
 ?>
