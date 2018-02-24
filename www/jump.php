@@ -9,20 +9,7 @@ $title = $matches[1];
 
 error_log($jump_url);
 error_log($rc);
-error_log($matches[1]);
-
-$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/JUMP/";
-
-$context = [
-  'http' => [
-    'method' => 'POST',
-    'header' => [
-      'Content-Type: text/plain'
-    ],
-  'content' => $jump_url . ' ' . $title
-  ]];
-
-file_get_contents($url, false, stream_context_create($context));
+error_log('__TITLE__ ' . $jump_url . ' ' . $matches[1]);
 
 //header('Location: ' . $jump_url);
 ?>
