@@ -5,6 +5,7 @@ $jump_url = $_GET['u'];
 $res = file_get_contents($jump_url);
 
 $rc = preg_match('/<title>(.+)<.title>/', $res, $matches);
+$title = $matches[1];
 
 error_log($jump_url);
 error_log($rc);
@@ -18,7 +19,7 @@ $context = [
     'header' => [
       'Content-Type: text/plain'
     ],
-  'content' => $jump_url
+  'content' => $jump_url . ' ' . $title
   ]];
 
 file_get_contents($url, false, stream_context_create($context));
