@@ -8,7 +8,7 @@ $rc = preg_match('/<title>(.+)<.title>/', $res, $matches);
 
 error_log($jump_url);
 error_log($rc);
-error_log($matches[0]);
+error_log($matches[1]);
 
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/JUMP/";
 
