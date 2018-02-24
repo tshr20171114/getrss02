@@ -4,6 +4,8 @@ set -x
 
 date
 
+tar xf phpPgAdmin-5.1.tar.bz2
+
 mv phpPgAdmin-5.1 www/phppgadmin
 
 rm -f phpPgAdmin-5.1.tar.bz2
