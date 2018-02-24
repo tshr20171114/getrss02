@@ -4,7 +4,7 @@ $jump_url = $_GET['u'];
 
 $res = file_get_contents($jump_url);
 
-$rc = preg_match('/<title>.+<.title>/', $res, $matches);
+$rc = preg_match('/<title>(.+)<.title>/', $res, $matches);
 
 error_log($jump_url);
 error_log($rc);
