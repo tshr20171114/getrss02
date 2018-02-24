@@ -16,5 +16,5 @@ $jump_url2 = $matches[1];
 
 error_log($jump_url2);
 
-//header('Location: ' . $jump_url);
+header('Location: ' . $jump_url2);
 ?>
