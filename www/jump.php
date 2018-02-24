@@ -9,7 +9,7 @@ $title = $matches[1];
 
 error_log($jump_url);
 error_log($rc);
-error_log('__TITLE__ ' . $jump_url . ' ' . $matches[1]);
+error_log('TITLETAG ' . $jump_url . ' ' . $matches[1]);
 
 //header('Location: ' . $jump_url);
 ?>
