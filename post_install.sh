@@ -21,7 +21,6 @@ export PGPASSWORD=${postgres_password}
 
 psql -U ${postgres_user} -d ${postgres_dbname} -h ${postgres_server} > /tmp/sql_result.txt << __HEREDOC__
 CREATE TABLE t_pattern (
-(
  pattern_id int primary key
 ,preg_match_pattern character varying(255) NOT NULL,
 ,preg_replace_pattern character varying(255),
