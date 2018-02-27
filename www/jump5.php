@@ -23,7 +23,10 @@ $base_url=getenv('TEST11');
 $embed_url=str_replace('__TARGET__', $matches[1], $base_url);
 error_log($embed_url);
 
+$test99=getenv('TEST99');
 
-//header('Location: ' . $jump_url2);
+echo '<HTML><BODY>';
+echo $test99;
+echo '</BODY></HTML>';
 
 ?>
