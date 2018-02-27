@@ -28,7 +28,7 @@ $test99=getenv('TEST99');
 echo '<HTML><HEAD>';
 echo '<TITLE>' . $title . '</TITLE>';
 echo '</HEAD><BODY>';
-echo $test99;
+echo $embed_url;
 echo '</BODY></HTML>';
 
 ?>
