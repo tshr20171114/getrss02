@@ -28,7 +28,9 @@ $test99=getenv('TEST99');
 echo '<HTML><HEAD>';
 echo '<TITLE>' . $title . '</TITLE>';
 echo '</HEAD><BODY>';
+echo '<iframe src="';
 echo $embed_url;
+echo '" frameborder=0 width=853 height=480 scrolling=no></iframe>';
 echo '</BODY></HTML>';
 
 ?>
