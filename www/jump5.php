@@ -19,6 +19,11 @@ $rc = preg_match($pattern, $res, $matches);
 
 error_log($matches[1]);
 
+$base_url=getenv('TEST11');
+$embed_url=str_replace('__TARGET__', $matches[1], $base_url);
+error_log($embed_url);
+
+
 //header('Location: ' . $jump_url2);
 
 ?>
