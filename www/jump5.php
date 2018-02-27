@@ -14,22 +14,11 @@ error_log('TITLETAG ' . $jump_url . ' ' . $title . ' ' . $jump_url2);
 
 $res = file_get_contents($jump_url2);
 
-for ($i = 0; $i < 10; $i++) {
-  if (getenv('PATTERN' . $i) !== FALSE) {
-    $patterns[] = getenv('PATTERN' . $i);
-  }
-}
+$pattern=getenv('TEST01');
+$rc = preg_match($pattern, $res, $matches);
 
-foreach ($patterns as $pattern) {
-  $rc = preg_match($pattern, $res, $matches);
-  if ($rc === 1) {
-    $jump_url3 = $matches[1];
-    error_log($jump_url3);
-    header('Location: ' . $jump_url3);
-    exit();
-  }
-}
+error_log($matches[1]);
 
-header('Location: ' . $jump_url2);
+//header('Location: ' . $jump_url2);
 
 ?>
