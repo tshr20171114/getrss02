@@ -25,7 +25,9 @@ error_log($embed_url);
 
 $test99=getenv('TEST99');
 
-echo '<HTML><BODY>';
+echo '<HTML><HEAD>';
+echo '<TITLE>' . $title . '</TITLE>';
+echo '</HEAD><BODY>';
 echo $test99;
 echo '</BODY></HTML>';
 
