@@ -20,6 +20,20 @@ for ($i = 0; $i < 10; $i++) {
   }
 }
 
+for ($i = 0; $i < 10; $i++) {
+  if (getenv('PATTERN_B' . $i) !== FALSE) {
+    $patterns_b[] = getenv('PATTERN_B' . $i);
+  }
+}
+
+foreach ($patterns_b as $pattern) {
+  $rc = preg_match($pattern, $res, $matches);
+  if ($rc === 1) {
+    $jump_url3 = $matches[1];
+    error_log('TEMP : ' . $jump_url3);
+  }
+}
+
 foreach ($patterns as $pattern) {
   $rc = preg_match($pattern, $res, $matches);
   if ($rc === 1) {
