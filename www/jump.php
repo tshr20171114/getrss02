@@ -27,10 +27,15 @@ for ($i = 0; $i < 10; $i++) {
 }
 
 foreach ($patterns_b as $pattern) {
-  $rc = preg_match($pattern, $res, $matches);
+  $ar = explode(',', $pattern);
+  $rc = preg_match($ar[0], $res, $matches);
   if ($rc === 1) {
     $jump_url3 = $matches[1];
-    error_log('TEMP : ' . $jump_url3);
+    error_log('TEMP1 : ' . $jump_url3);
+    $rc = preg_match($ar[1], $jump_url3, $matches);
+    error_log('TEMP2 : ' . $matches[1]);
+    
+    /*
     echo '<HTML><HEAD>';
     echo '<TITLE>' . $title . '</TITLE>';
     echo '</HEAD><BODY>';
@@ -39,6 +44,7 @@ foreach ($patterns_b as $pattern) {
     echo '"></iframe>';
     echo '</BODY></HTML>';
     exit();
+    */
   }
 }
 
