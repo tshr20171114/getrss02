@@ -30,21 +30,19 @@ foreach ($patterns_b as $pattern) {
   $ar = explode(',', $pattern);
   $rc = preg_match($ar[0], $res, $matches);
   if ($rc === 1) {
-    $jump_url3 = $matches[1];
-    error_log('TEMP1 : ' . $jump_url3);
-    $aaa = preg_replace($ar[1], $ar[2], $jump_url3);
-    error_log('TEMP2 : ' . $aaa);
+    $base_url = $matches[1];
+    error_log('TEMP1 : ' . $base_url);
+    $embed_url = preg_replace($ar[1], $ar[2], $base_url);
+    error_log('TEMP2 : ' . $embed_url);
     
-    /*
     echo '<HTML><HEAD>';
     echo '<TITLE>' . $title . '</TITLE>';
     echo '</HEAD><BODY>';
     echo '<iframe src="';
-    echo $jump_url3;
+    echo $embed_url;
     echo '"></iframe>';
     echo '</BODY></HTML>';
     exit();
-    */
   }
 }
 
