@@ -31,6 +31,14 @@ foreach ($patterns_b as $pattern) {
   if ($rc === 1) {
     $jump_url3 = $matches[1];
     error_log('TEMP : ' . $jump_url3);
+    echo '<HTML><HEAD>';
+    echo '<TITLE>' . $title . '</TITLE>';
+    echo '</HEAD><BODY>';
+    echo '<iframe src="';
+    echo $jump_url3;
+    echo '"></iframe>';
+    echo '</BODY></HTML>';
+    exit();
   }
 }
 
