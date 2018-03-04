@@ -40,7 +40,7 @@ foreach ($patterns_b as $pattern) {
     echo '</HEAD><BODY>';
     echo '<iframe src="';
     echo $embed_url;
-    echo '" frameborder=0 width=100% height=480 scrolling=no allowFullScreen></iframe>';
+    echo '" frameborder=0 width=100% height=480 scrolling=no></iframe>';
     echo '</BODY></HTML>';
     exit();
   }
