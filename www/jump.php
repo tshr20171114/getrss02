@@ -32,8 +32,8 @@ foreach ($patterns_b as $pattern) {
   if ($rc === 1) {
     $jump_url3 = $matches[1];
     error_log('TEMP1 : ' . $jump_url3);
-    $rc = preg_match($ar[1], $jump_url3, $matches);
-    error_log('TEMP2 : ' . $matches[1]);
+    $aaa = preg_replace($ar[1], $ar[2], $jump_url3);
+    error_log('TEMP2 : ' . $aaa);
     
     /*
     echo '<HTML><HEAD>';
