@@ -14,11 +14,26 @@ error_log('TITLETAG ' . $jump_url . ' ' . $title . ' ' . $jump_url2);
 
 $res = file_get_contents($jump_url2);
 
+$connection_info = parse_url(getenv('DATABASE_URL'));
+$pdo = new PDO(
+  "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
+  $connection_info['user'],
+  $connection_info['pass']);
+
+$sql = <<< __HEREDOC__
+SELECT M1.preg_match_pattern
+  FROM m_pattern M1
+ WHERE record_type = 1
+ ORDER BY M1.pattern_id
+__HEREDOC__;
+
 for ($i = 0; $i < 10; $i++) {
   if (getenv('PATTERN' . $i) !== FALSE) {
     $patterns[] = getenv('PATTERN' . $i);
   }
 }
+
+$pdo = null;
 
 for ($i = 0; $i < 10; $i++) {
   if (getenv('PATTERN_B' . $i) !== FALSE) {
@@ -58,4 +73,5 @@ foreach ($patterns as $pattern) {
 
 header('Location: ' . $jump_url2);
 
+$pdo = null;
 ?>
