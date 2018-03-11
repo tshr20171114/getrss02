@@ -27,6 +27,11 @@ SELECT M1.preg_match_pattern
  ORDER BY M1.pattern_id
 __HEREDOC__;
 
+foreach ($pdo->query($sql) as $row)
+{
+  $patterns[] = $row['preg_match_pattern'];
+}
+
 for ($i = 0; $i < 10; $i++) {
   if (getenv('PATTERN' . $i) !== FALSE) {
     $patterns[] = getenv('PATTERN' . $i);
