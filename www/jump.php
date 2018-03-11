@@ -32,12 +32,6 @@ foreach ($pdo->query($sql) as $row)
   $patterns[] = $row['preg_match_pattern'];
 }
 
-for ($i = 0; $i < 10; $i++) {
-  if (getenv('PATTERN' . $i) !== FALSE) {
-    $patterns[] = getenv('PATTERN' . $i);
-  }
-}
-
 $pdo = null;
 
 for ($i = 0; $i < 10; $i++) {
