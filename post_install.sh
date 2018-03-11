@@ -29,6 +29,13 @@ CREATE TABLE t_pattern (
 __HEREDOC__
 cat /tmp/sql_result.txt
 
+# ***** phppgadmin *****
+
+pushd www
+git clone --depth 1 https://github.com/phppgadmin/phppgadmin.git phppgadmin
+cp ../70_etc/config.inc.php phppgadmin/conf/
+cp ../70_etc/Connection.php phppgadmin/classes/database/
+popd
 
 echo ${start_date}
 date
