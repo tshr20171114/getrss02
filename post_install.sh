@@ -29,6 +29,15 @@ CREATE TABLE t_pattern (
 __HEREDOC__
 cat /tmp/sql_result.txt
 
+psql -U ${postgres_user} -d ${postgres_dbname} -h ${postgres_server} > /tmp/sql_result.txt << __HEREDOC__
+CREATE TABLE m_pattern (
+ pattern_id int primary key
+,preg_match_pattern character varying(512) NOT NULL
+,record_type int
+);
+__HEREDOC__
+cat /tmp/sql_result.txt
+
 # ***** phppgadmin *****
 
 pushd www
