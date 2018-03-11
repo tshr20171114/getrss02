@@ -33,7 +33,7 @@ psql -U ${postgres_user} -d ${postgres_dbname} -h ${postgres_server} > /tmp/sql_
 CREATE TABLE m_pattern (
  pattern_id int primary key
 ,preg_match_pattern character varying(512) NOT NULL
-,record_type int
+,record_type int NOT NULL
 );
 __HEREDOC__
 cat /tmp/sql_result.txt
