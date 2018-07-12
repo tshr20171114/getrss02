@@ -77,7 +77,7 @@ header('Location: ' . $jump_url2);
 exit();
 
 function get_contents($url_) {
-  $pid = getmypid();
+  // $pid = getmypid();
   $ch = curl_init();
   curl_setopt_array($ch,
                     [CURLOPT_URL => $url_,
