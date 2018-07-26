@@ -22,6 +22,12 @@ for ($i = 0; $i < 10; $i++) {
   }
 }
 
+$connection_info = parse_url(getenv('DATABASE_URL'));
+$pdo = new PDO(
+  "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
+  $connection_info['user'],
+  $connection_info['pass']);
+
 foreach ($patterns_b as $pattern) {
   $ar = explode(',', $pattern);
   $rc = preg_match($ar[0], $res, $matches);
@@ -38,15 +44,10 @@ foreach ($patterns_b as $pattern) {
     echo $embed_url;
     echo '" frameborder=0 width=100% height=480 scrolling=no></iframe>';
     echo '</BODY></HTML>';
+    $pdo = null;
     exit();
   }
 }
-
-$connection_info = parse_url(getenv('DATABASE_URL'));
-$pdo = new PDO(
-  "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
-  $connection_info['user'],
-  $connection_info['pass']);
 
 $sql = <<< __HEREDOC__
 SELECT M1.preg_match_pattern
