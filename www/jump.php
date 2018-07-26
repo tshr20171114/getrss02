@@ -50,7 +50,7 @@ foreach ($patterns_b as $pattern) {
     echo '" frameborder=0 width=100% height=480 scrolling=no></iframe>';
     echo '</BODY></HTML>';
    
-    $statement->execute([':b_uri' => $href]);
+    $statement->execute([':b_uri' => $embed_url]);
     $pdo = null;
     exit();
   }
