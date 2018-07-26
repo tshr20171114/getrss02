@@ -28,6 +28,11 @@ $pdo = new PDO(
   $connection_info['user'],
   $connection_info['pass']);
 
+$sql = <<< __HEREDOC__
+INSERT INTO t_link ( uri ) VALUES ( :b_uri )
+__HEREDOC__;
+$statement = $pdo->prepare($sql);
+
 foreach ($patterns_b as $pattern) {
   $ar = explode(',', $pattern);
   $rc = preg_match($ar[0], $res, $matches);
@@ -44,6 +49,8 @@ foreach ($patterns_b as $pattern) {
     echo $embed_url;
     echo '" frameborder=0 width=100% height=480 scrolling=no></iframe>';
     echo '</BODY></HTML>';
+   
+    $statement->execute([':b_uri' => $href]);
     $pdo = null;
     exit();
   }
