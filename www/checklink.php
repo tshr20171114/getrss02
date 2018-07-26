@@ -6,11 +6,14 @@ $url = $_GET['u'];
 
 error_log("${pid} ${url}");
 
-$res = file_get_contents($url);
+header('Content-Type: text/plain');
+
+$res = get_contents($url);
 
 $rc = preg_match('/<div class="gotoBlog"><a href="(.+?)"/', $res, $matches);
 
 if ($rc != 1) {
+  echo 'NONE';
   exit;
 }
 
@@ -18,7 +21,7 @@ $url2 = $matches[1];
 
 error_log("${pid} ${url2}");
 
-$res = file_get_contents($url2);
+$res = get_contents($url2);
 
 $url3 = 'none';
 for ($i = 0; $i < 2; $i++) {
@@ -40,8 +43,6 @@ for ($i = 0; $i < 2; $i++) {
   error_log("${pid} ${url3}");
 }
 
-header('Content-Type: text/plain');
-
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
   "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
@@ -59,5 +60,27 @@ if ($result === FALSE) {
   echo 'NONE';
 } else {
   echo 'EXISTS';
+}
+$pdo = null;
+exit;
+
+function get_contents($url_) {
+  $ch = curl_init();
+  curl_setopt_array($ch,
+                    [CURLOPT_URL => $url_,
+                     CURLOPT_RETURNTRANSFER => TRUE,
+                     CURLOPT_ENCODING => '',
+                     CURLOPT_CONNECTTIMEOUT => 20,
+                     CURLOPT_FOLLOWLOCATION => TRUE,
+                     CURLOPT_MAXREDIRS => 3,
+                     CURLOPT_FILETIME => TRUE,
+                     // CURLOPT_TCP_FASTOPEN => TRUE,
+                     CURLOPT_SSL_FALSESTART => TRUE,
+                     CURLOPT_PATH_AS_IS => TRUE,
+                     CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/61.0',
+                    ]);
+  $contents = curl_exec($ch);
+  curl_close($ch);  
+  return $contents;
 }
 ?>
