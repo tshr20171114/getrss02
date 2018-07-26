@@ -40,7 +40,6 @@ for ($i = 0; $i < 2; $i++) {
   error_log("${pid} ${url3}");
 }
 
-
 header('Content-Type: text/plain');
 
 $connection_info = parse_url(getenv('DATABASE_URL'));
