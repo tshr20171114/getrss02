@@ -54,8 +54,8 @@ SELECT 'DUMMY' FROM t_link WHERE uri = :b_uri
 __HEREDOC__;
 $statement = $pdo->prepare($sql);
 
-$statement_select->execute([':b_uri' => $url3 ]);
-$result = $statement_select->fetch();
+$statement->execute([':b_uri' => $url3 ]);
+$result = $statement->fetch();
 if ($result === FALSE) {
   echo 'NONE';
 } else {
