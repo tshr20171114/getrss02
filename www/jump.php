@@ -58,7 +58,7 @@ if ($rc === 1) {
 $pattern = explode(',', getenv('LINK_PATTERN3'));
 $rc = preg_match('/' . $pattern[0] . '/', $res, $matches);
 if ($rc === 1) {
-  $embed_url = str_replace($pattern[1], $matches[1], $pattern[2]);
+  $embed_url = str_replace($pattern[1], $matches[2], $pattern[2]);
   error_log($embed_url);
   $statement->execute([':b_uri' => $embed_url]);
   $pdo = null;
