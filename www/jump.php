@@ -25,6 +25,7 @@ INSERT INTO t_link ( uri ) VALUES ( :b_uri )
 __HEREDOC__;
 $statement = $pdo->prepare($sql);
 
+/*
 $pattern = explode(',', getenv('LINK_PATTERN1'));
 $rc = preg_match('/' . $pattern[0] . '/', $res, $matches);
 if ($rc === 1) {
@@ -33,6 +34,26 @@ if ($rc === 1) {
   $statement->execute([':b_uri' => $jump_url3]);
   $pdo = null;
   header('Location: ' . $jump_url3);
+  exit();
+}
+*/
+
+$pattern = explode(',', getenv('LINK_PATTERN4'));
+$rc = preg_match('/' . $pattern[0] . '/', $res, $matches);
+if ($rc === 1) {
+  $embed_url = str_replace($pattern[1], $matches[3], $pattern[2]);
+  error_log($embed_url);
+  $statement->execute([':b_uri' => $embed_url]);
+  $pdo = null;
+  
+  echo '<HTML><HEAD>';
+  echo '<TITLE>' . $title . '</TITLE>';
+  echo '</HEAD><BODY>';
+  echo '<iframe src="';
+  echo $embed_url;
+  echo '" frameborder=0 width=100% height=480 scrolling=no></iframe>';
+  echo '</BODY></HTML>';
+ 
   exit();
 }
 
