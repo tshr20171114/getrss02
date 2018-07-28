@@ -56,29 +56,18 @@ foreach ($patterns_b as $pattern) {
   }
 }
 
-$sql = <<< __HEREDOC__
-SELECT M1.preg_match_pattern
-  FROM m_pattern M1
- WHERE record_type = 1
- ORDER BY M1.pattern_id
-__HEREDOC__;
-
-foreach ($pdo->query($sql) as $row)
-{
-  $patterns[] = $row['preg_match_pattern'];
+$pattern = explode(',', getenv('LINK_PATTERN1'));
+$rc = preg_match('/' . $pattern[0] . '/', $res, $matches);
+if ($rc == 1) {
+  $jump_url3 = str_replace($pattern[1], $matches[1], $pattern[2]);
+  error_log($jump_url3);
+  $statement->execute([':b_uri' => $jump_url3]);
+  $pdo = null;
+  header('Location: ' . $jump_url3);
+  exit();
 }
 
 $pdo = null;
-
-foreach ($patterns as $pattern) {
-  $rc = preg_match($pattern, $res, $matches);
-  if ($rc === 1) {
-    $jump_url3 = $matches[1];
-    error_log($jump_url3);
-    header('Location: ' . $jump_url3);
-    exit();
-  }
-}
 
 header('Location: ' . $jump_url2);
 
