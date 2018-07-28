@@ -24,8 +24,9 @@ for ($i = 0; $i < 2; $i++) {
   if ($rc != 1) {
     continue;
   }
-  error_log($matches[1]);
-  $embed_url = str_replace($pattern[1], $matches[1], $pattern[2]);
+  $replace = end($matches);
+  error_log($replace);
+  $embed_url = str_replace($pattern[1], $replace, $pattern[2]);
   error_log($embed_url);
  
   echo '<HTML><HEAD>';
