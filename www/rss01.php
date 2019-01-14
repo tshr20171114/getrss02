@@ -49,6 +49,7 @@ for ($j = 0; $j < 2; $j++) {
     error_log($res['http_code'] . " ${url}");
     if ($res['http_code'] == '200') {
       $tmp = curl_multi_getcontent($ch);
+      error_log(strlen($tmp));
       if (strlen($tmp) > 100000) {
         $list_res[$url] = $tmp;
       }
