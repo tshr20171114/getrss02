@@ -47,7 +47,7 @@ foreach ($list_ch as $url => $ch) {
 }
 
 foreach ($list_res as $res) {
-  error_log($res);
+  error_log(strlen($res));
   $tmp1 = explode('<div class="innerHeaderSubMenu langTextSubMenu">', $res, 2);
   $tmp1 = explode('<div class="pagination3">', $tmp1[1]);
 
