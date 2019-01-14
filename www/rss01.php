@@ -50,7 +50,7 @@ for ($j = 0; $j < 2; $j++) {
     if ($res['http_code'] == '200') {
       $tmp = curl_multi_getcontent($ch);
       if (strlen($tmp) > 100000) {
-        $list_res[$url] = curl_multi_getcontent($ch);
+        $list_res[$url] = $tmp;
       }
     }
     curl_multi_remove_handle($mh, $ch);
