@@ -91,7 +91,7 @@ $xml_root_text = <<< __HEREDOC__
 __HEREDOC__;
 
 file_put_contents('/tmp/rss.xml', str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text));
-$rc = filesize('/tmp/rss.xml');
+$rc = filesize('/tmp/' . getenv('RSS_010_FILE'));
 error_log('file size : ' . $rc);
 
 $ftp_link_id = ftp_connect(getenv('FC2_FTP_SERVER'));
@@ -107,7 +107,7 @@ $rc = ftp_nlist($ftp_link_id, '.');
 
 error_log(print_r($rc, true));
 
-$rc = ftp_put($ftp_link_id, 'rss.xml', '/tmp/rss.xml', FTP_ASCII);
+$rc = ftp_put($ftp_link_id, getenv('RSS_010_FILE'), '/tmp/' . getenv('RSS_010_FILE'), FTP_ASCII);
 
 error_log($rc);
 
