@@ -59,6 +59,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.3.0",
+        "ext-ftp": "*",
         "ext-mbstring": "*"
     },
     "platform-dev": []
