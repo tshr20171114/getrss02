@@ -9,6 +9,7 @@ $list_res = [];
 
 for ($j = 0; $j < 2; $j++) {
   $mh = curl_multi_init();
+  $list_ch = [];
   for ($i = 0; $i < 30; $i++) {
     $url = getenv('URL_010') . ($i + 1);
     if (array_key_exists($url, $list_res)) {
