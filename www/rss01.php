@@ -118,6 +118,10 @@ error_log($rc);
 
 ftp_close($ftp_link_id);
 
+header('Content-Type: application/xml');
+
+echo '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"/>';
+
 $time_finish = time();
 error_log("${pid} FINISH " . date('s', $time_finish - $time_start) . 's');
 
