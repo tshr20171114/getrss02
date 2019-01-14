@@ -86,7 +86,7 @@ $xml_root_text = <<< __HEREDOC__
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>rss3</title>
+    <title>rss01</title>
     <link>http://www.yahoo.co.jp</link>
     <description>none</description>
     <language>ja</language>
