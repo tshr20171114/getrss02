@@ -95,7 +95,7 @@ $xml_root_text = <<< __HEREDOC__
 </rss>
 __HEREDOC__;
 
-file_put_contents('/tmp/rss.xml', str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text));
+file_put_contents('/tmp/' . getenv('RSS_010_FILE'), str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text));
 $rc = filesize('/tmp/' . getenv('RSS_010_FILE'));
 error_log('file size : ' . $rc);
 
