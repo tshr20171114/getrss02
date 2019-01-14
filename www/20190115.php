@@ -5,9 +5,6 @@ $mh = curl_multi_init();
 $list_ch = [];
 for ($i = 0; $i < 2; $i++) {
   $url = getenv('TEST_URL_900') . ($i + 1);
-  if (array_key_exists($url, $list_res)) {
-    continue;
-  }
   error_log($url);
   $ch = curl_init();
   
