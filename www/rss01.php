@@ -3,13 +3,12 @@
 $time_start = time();
 error_log("START ${requesturi} " . date('Y/m/d H:i:s', $time_start));
 
-$mh = curl_multi_init();
-
 error_log(getenv('USER_AGENT'));
 
 $list_res = [];
 
 for ($j = 0; $j < 2; $j++) {
+  $mh = curl_multi_init();
   for ($i = 0; $i < 30; $i++) {
     $url = getenv('URL_010') . ($i + 1);
     if (array_key_exists($url, $list_res)) {
@@ -53,7 +52,10 @@ for ($j = 0; $j < 2; $j++) {
         $list_res[$url] = curl_multi_getcontent($ch);
       }
     }
+    curl_multi_remove_handle($mh, $ch);
+    curl_close($ch);
   }
+  curl_multi_close($mh);
 }
 
 foreach ($list_res as $res) {
