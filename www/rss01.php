@@ -5,6 +5,8 @@ error_log("START ${requesturi} " . date('Y/m/d H:i:s', $time_start));
 
 $mh = curl_multi_init();
 
+error_log(getenv('USER_AGENT'));
+
 for ($i = 0; $i < 30; $i++) {
   $url = getenv('URL_010') . ($i + 1);
   error_log($url);
@@ -39,10 +41,13 @@ while ($active && $rc == CURLM_OK) {
 foreach ($list_ch as $url => $ch) {
   $res = curl_getinfo($ch);
   error_log($res['http_code'] . " ${url}");
-  $list_res[] = curl_multi_getcontent($ch);
+  if ($res['http_code'] == '200') {
+    $list_res[] = curl_multi_getcontent($ch);
+  }
 }
 
 foreach ($list_res as $res) {
+  error_log($res);
   $tmp1 = explode('<div class="innerHeaderSubMenu langTextSubMenu">', $res, 2);
   $tmp1 = explode('<div class="pagination3">', $tmp1[1]);
 
