@@ -140,7 +140,8 @@ $options = [
 ];
 
 $ch = curl_init();
-curl_setopt_array($ch, $options);
+$rc = curl_setopt_array($ch, $options);
+error_log('curl_setopt_array : ' . $rc);
 $res = curl_exec($ch);
 curl_close($ch);
 
@@ -166,7 +167,7 @@ $options = [
 ];
 
 $ch = curl_init();
-curl_setopt_array($ch, $options);
+$rc = curl_setopt_array($ch, $options);
 $res = curl_exec($ch);
 curl_close($ch);
 
