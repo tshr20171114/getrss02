@@ -60,6 +60,7 @@ for ($j = 0; $j < 2; $j++) {
 }
 
 error_log('count : ' . count($list_res));
+$items = [];
 foreach ($list_res as $res) {
   $tmp1 = explode('<div class="innerHeaderSubMenu langTextSubMenu">', $res, 2);
   $tmp1 = explode('<div class="pagination3">', $tmp1[1]);
@@ -194,7 +195,7 @@ $xml_text = <<< __HEREDOC__
 __HEREDOC__;
 
 $xml_text = str_replace('__TITLE__', $tmp, $xml_text);
-$xml_text = str_replace('__DESCRIPTION__', date('Y/m/d H:i', strtotime('+9 hours')), $xml_text);
+$xml_text = str_replace('__DESCRIPTION__', 'count : ' . count($items) . date(' Y/m/d H:i', strtotime('+9 hours')), $xml_text);
 
 echo $xml_text;
 
