@@ -26,7 +26,6 @@ for ($j = 0; $j < 2; $j++) {
             CURLOPT_ENCODING => '',
             CURLOPT_FOLLOWLOCATION => 1,
             CURLOPT_MAXREDIRS => 3,
-            CURLOPT_SSL_FALSESTART => true,
     ];
     curl_setopt_array($ch, $options);
 
