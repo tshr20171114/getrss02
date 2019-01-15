@@ -140,12 +140,6 @@ $options = [
 ];
 $options = [
     CURLOPT_URL => $url,
-    CURLOPT_USERAGENT => getenv('USER_AGENT'),
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_FOLLOWLOCATION => 1,
-    CURLOPT_MAXREDIRS => 3,
-    CURLOPT_SSL_FALSESTART => true,
 ];
 
 $ch = curl_init();
