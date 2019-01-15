@@ -169,6 +169,8 @@ $rc = curl_setopt_array($ch, $options);
 $res = curl_exec($ch);
 curl_close($ch);
 
+error_log($url . ' : ' . $res);
+
 $data = json_decode($res, true);
 
 $dyno_used = (int)$data['quota_used'];
