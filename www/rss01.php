@@ -140,6 +140,8 @@ $options = [
 ];
 $options = [
     CURLOPT_URL => $url,
+    CURLOPT_USERAGENT => getenv('USER_AGENT'),
+    CURLOPT_RETURNTRANSFER => true,
 ];
 
 $ch = curl_init();
@@ -203,5 +205,5 @@ $xml_text = str_replace('__DESCRIPTION__', date('Y/m/d H:i', strtotime('+9 hours
 echo $xml_text;
 
 $time_finish = time();
-error_log("${pid} FINISH " . date('s', $time_finish - $time_start) . 's');
+error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
 
