@@ -105,22 +105,23 @@ file_put_contents('/tmp/' . getenv('RSS_010_FILE'), str_replace('__ITEMS__', imp
 $rc = filesize('/tmp/' . getenv('RSS_010_FILE'));
 error_log('file size : ' . $rc);
 
-$ftp_link_id = ftp_connect(getenv('FC2_FTP_SERVER'));
-$rc = ftp_login($ftp_link_id, getenv('FC2_FTP_ID'), getenv('FC2_FTP_PASSWORD'));
-error_log('ftp_login : ' . $rc);
+if (count($items) > 0) {
+  $ftp_link_id = ftp_connect(getenv('FC2_FTP_SERVER'));
+  $rc = ftp_login($ftp_link_id, getenv('FC2_FTP_ID'), getenv('FC2_FTP_PASSWORD'));
+  error_log('ftp_login : ' . $rc);
 
-$rc = ftp_pasv($ftp_link_id, true);
-error_log('ftp_pasv : ' . $rc);
+  $rc = ftp_pasv($ftp_link_id, true);
+  error_log('ftp_pasv : ' . $rc);
 
-$rc = ftp_nlist($ftp_link_id, '.');
-error_log(print_r($rc, true));
+  $rc = ftp_nlist($ftp_link_id, '.');
+  error_log(print_r($rc, true));
 
-$rc = ftp_put($ftp_link_id, getenv('RSS_010_FILE'), '/tmp/' . getenv('RSS_010_FILE'), FTP_ASCII);
-error_log('ftp_put : ' . $rc);
+  $rc = ftp_put($ftp_link_id, getenv('RSS_010_FILE'), '/tmp/' . getenv('RSS_010_FILE'), FTP_ASCII);
+  error_log('ftp_put : ' . $rc);
 
-$rc = ftp_close($ftp_link_id);
-error_log('ftp_close : ' . $rc);
-
+  $rc = ftp_close($ftp_link_id);
+  error_log('ftp_close : ' . $rc);
+}
 
 $api_key = getenv('HEROKU_API_KEY');
 $url = 'https://api.heroku.com/account';
