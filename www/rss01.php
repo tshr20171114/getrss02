@@ -55,6 +55,8 @@ for ($j = 0; $j < 2; $j++) {
         file_put_contents($file_name, $tmp);
       } elseif ($j === 1 && file_exists($file_name)){
         $list_res[$url] = file_get_contents($file_name);
+      } else {
+        error_log($tmp);
       }
     }
     curl_multi_remove_handle($mh, $ch);
