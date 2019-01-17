@@ -92,6 +92,8 @@ foreach ($list_res as $res) {
   }
 }
 
+$items = array_unique($items);
+
 $xml_root_text = <<< __HEREDOC__
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
