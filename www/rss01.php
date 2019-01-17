@@ -52,6 +52,8 @@ for ($j = 0; $j < 2; $j++) {
       if (strlen($tmp) > 100000) {
         $list_res[$url] = $tmp;
         file_put_contents('/tmp/' . hash('sha512', $url), $tmp);
+      } elseif ($j === 1 && file_exists('/tmp/' . hash('sha512', $url))){
+        $list_res[$url] = file_get_contents('/tmp/' . hash('sha512', $url));
       }
     }
     curl_multi_remove_handle($mh, $ch);
