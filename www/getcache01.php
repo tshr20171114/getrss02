@@ -25,6 +25,8 @@ for ($i = 0; $i < 40; $i++) {
               'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
               'Cache-Control: no-cache',
               'Connection: keep-alive',
+              'DNT: 1',
+              'Upgrade-Insecure-Requests: 1',
               ]
   ];
   
