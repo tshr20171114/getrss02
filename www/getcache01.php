@@ -42,6 +42,8 @@ for ($i = 0; $i < 40; $i++) {
   
   if (strlen($res) > 100000) {
     file_put_contents($file_name, $res);
+  } else {
+    sleep(1);
   }
 }
 
