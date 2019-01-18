@@ -9,6 +9,7 @@ for ($i = 0; $i < 40; $i++) {
   if (file_exists($file_name)) {
     continue;
   }
+  error_log($url);
   
   $ch = curl_init();
   
