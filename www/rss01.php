@@ -29,6 +29,10 @@ for ($j = 0; $j < 2; $j++) {
             CURLOPT_HTTPHEADER => [
                 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                 'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+                'Cache-Control: no-cache',
+                'Connection: keep-alive',
+                'DNT: 1',
+                'Upgrade-Insecure-Requests: 1',
                 ]
     ];
     curl_setopt_array($ch, $options);
@@ -211,6 +215,12 @@ $xml_text = str_replace('__TITLE__', $tmp, $xml_text);
 $xml_text = str_replace('__DESCRIPTION__', 'count : ' . count($items) . date(' Y/m/d H:i', strtotime('+9 hours')), $xml_text);
 
 echo $xml_text;
+
+$ch = curl_init();
+$url = $url = 'https://' . getenv('TARGET_APP_NAME') . '.herokuapp.com/getcache01.php';
+$rc = curl_setopt_array($ch, [CURLOPT_URL => $url, CURLOPT_TIMEOUT => 2]);
+$res = curl_exec($ch);
+curl_close($ch);
 
 $time_finish = time();
 error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
