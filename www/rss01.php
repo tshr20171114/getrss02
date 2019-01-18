@@ -26,6 +26,10 @@ for ($j = 0; $j < 2; $j++) {
             CURLOPT_ENCODING => '',
             CURLOPT_FOLLOWLOCATION => 1,
             CURLOPT_MAXREDIRS => 3,
+            CURLOPT_HTTPHEADER => [
+                'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+                ]
     ];
     curl_setopt_array($ch, $options);
 
