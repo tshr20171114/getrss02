@@ -20,7 +20,7 @@ for ($j = 0; $j < 2; $j++) {
     $ch = curl_init();
 
     $options = [
-            CURLOPT_URL => $url . '&' . time(),
+            CURLOPT_URL => $url,
             CURLOPT_USERAGENT => getenv('USER_AGENT'),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
