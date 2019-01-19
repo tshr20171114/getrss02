@@ -38,8 +38,8 @@ curl_close($ch);
 
 error_log(file_get_contents($cookie));
 
-for ($i = 0; $i < 160; $i++) {
-  $url = getenv('URL_010') . $i;
+for ($i = 0; $i < 100; $i++) {
+  $url = getenv('URL_010') . ($i + 1);
   $file_name = '/tmp/' . hash('sha512', $url);
   if (file_exists($file_name)) {
     continue;
