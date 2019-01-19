@@ -204,7 +204,9 @@ if (count($items) > 0) {
   $rc = curl_setopt_array($ch, $options);
   error_log('curl_setopt_array : ' . $rc);
   $res = curl_exec($ch);
+  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
   curl_close($ch);
+  error_log($http_code);
   error_log($res);
 }
 
