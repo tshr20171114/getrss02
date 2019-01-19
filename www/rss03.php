@@ -90,19 +90,11 @@ for ($j = 0; $j < 2; $j++) {
     $res = curl_getinfo($ch);
     error_log($res['http_code'] . " ${url}");
     if ($res['http_code'] == '200') {
-      $file_name = '/tmp/' . hash('sha512', $url);
       $tmp = curl_multi_getcontent($ch);
       error_log('size : ' . strlen($tmp));
-      /*
       if (strlen($tmp) > 50000) {
         $list_res[$url] = $tmp;
-        file_put_contents($file_name, $tmp);
-      } elseif ($j === 1 && file_exists($file_name)){
-        $list_res[$url] = file_get_contents($file_name);
-      } else {
-        // error_log($tmp);
       }
-      */
     }
     curl_multi_remove_handle($mh, $ch);
     curl_close($ch);
