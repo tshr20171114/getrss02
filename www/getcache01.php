@@ -40,7 +40,7 @@ error_log(file_get_contents($cookie));
 
 for ($j = 0; $j < 3; $j++) {
   for ($i = 0; $i < 40; $i++) {
-    $url = getenv('URL_010') . ($i + 1);
+    $url = getenv('URL_010') . (($i < 20 ? $i : $i + 100) + 1);
     $file_name = '/tmp/' . hash('sha512', $url);
     if (file_exists($file_name)) {
       continue;
