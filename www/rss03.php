@@ -109,7 +109,7 @@ $items = [];
 foreach ($list_res as $res) {
   $list = explode('<div class="list" id="', $res);
   array_shift($list);
-  error_log(print_r($tmp1, true));
+  error_log(print_r($list, true));
   /*
   foreach ($list as $item) {
     $rc = preg_match('/.+?<a href="(.+?)" title="(.+?)".+?<img src="(.+?)".+?<span class="movieTime">(\d+).+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
