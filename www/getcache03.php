@@ -116,7 +116,7 @@ foreach ($list_res as $res) {
       $page = (int)$match[2];
       $url = 'http://' . parse_url(getenv('URL_030'))['host'] . $match[0];
       $file_name = '/tmp/' . hash('sha512', $url);
-      if ($page < 50 || file_exists($file_name))) {
+      if ($page < 50 || file_exists($file_name)) {
         continue;
       }
       
