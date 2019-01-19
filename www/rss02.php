@@ -118,7 +118,7 @@ foreach ($list_res as $res) {
   array_shift($list);
   error_log(print_r($tmp1, true));
   foreach ($list as $item) {
-    $rc = preg_match('/<span class="proName".+?>(.+?)<.+?<span class="movieCnt">(.+?)<.+?<a href="(.+?)">.+?<div class="itemTitle">(.+?)<\/div>.+?<img src="(.+?)".+?<span class="movieTime">(.+?)</s', $item, $match);
+    $rc = preg_match('/.+?<a href="(.+?)" alt="(.+?)".+?<span class="movieTime">(.+?)<.+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
     error_log(print_r($match, true));
   }
 }
