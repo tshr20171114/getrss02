@@ -31,7 +31,7 @@ for ($i = 0; $i < 40; $i++) {
               'Upgrade-Insecure-Requests: 1',
               ],
           CURLOPT_COOKIEJAR => $cookie,
-          CURLOPT_COOKIEFILE, => $cookie,
+          CURLOPT_COOKIEFILE => $cookie,
   ];
   
   foreach ($options as $key => $value) {
