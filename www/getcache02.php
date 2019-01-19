@@ -7,6 +7,8 @@ $cookie = $tmpfname = tempnam("/tmp", time());
 
 get_cookie($cookie);
 
+$restart_flag = false;
+
 for ($j = 0; $j < 3; $j++) {
   for ($i = 0; $i < 100; $i++) {
     $url = getenv('URL_020') . ($i + 1);
@@ -48,6 +50,7 @@ for ($j = 0; $j < 3; $j++) {
 
     if (strlen($res) > 50000) {
       file_put_contents($file_name, $res);
+      $restart_flag = true;
     } else {
       sleep(1);
       get_cookie($cookie);
@@ -58,6 +61,14 @@ for ($j = 0; $j < 3; $j++) {
 error_log(file_get_contents($cookie));
 
 unlink($cookie);
+
+if ($restart_flag) {
+  $ch = curl_init();
+  $url = $url = 'https://' . getenv('TARGET_APP_NAME') . '.herokuapp.com/rss01.php';
+  $rc = curl_setopt_array($ch, [CURLOPT_URL => $url, CURLOPT_TIMEOUT => 2]);
+  $res = curl_exec($ch);
+  curl_close($ch);
+}
 
 $time_finish = time();
 error_log("FINISH " . ($time_finish - $time_start) . 's');
