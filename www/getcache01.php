@@ -60,7 +60,7 @@ error_log(file_get_contents($cookie));
 unlink($cookie);
 
 $time_finish = time();
-error_log("FINISH " . (($time_finish - $time_start) % 1) . 's');
+error_log("FINISH " . ($time_finish - $time_start) . 's');
 
 function get_cookie($cookie_) {
   $url = 'https://' . parse_url(getenv('URL_010'))['host'] . '/' . '?' . time();
