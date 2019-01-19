@@ -44,7 +44,7 @@ $list_res = [];
 for ($j = 0; $j < 2; $j++) {
   $mh = curl_multi_init();
   $list_ch = [];
-  for ($i = 0; $i < 5; $i++) {
+  for ($i = 0; $i < 10; $i++) {
     $url = getenv('URL_020') . ($i + 1);
     if (array_key_exists($url, $list_res)) {
       continue;
@@ -216,6 +216,12 @@ __HEREDOC__;
 $xml_text = str_replace('__DESCRIPTION__', 'count : ' . count($items) . date(' Y/m/d H:i', strtotime('+9 hours')), $xml_text);
 
 echo $xml_text;
+
+$ch = curl_init();
+$url = $url = 'https://' . getenv('TARGET_APP_NAME') . '.herokuapp.com/getcache02.php';
+$rc = curl_setopt_array($ch, [CURLOPT_URL => $url, CURLOPT_TIMEOUT => 2]);
+$res = curl_exec($ch);
+curl_close($ch);
 
 $time_finish = time();
 error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
