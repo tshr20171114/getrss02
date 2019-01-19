@@ -9,7 +9,7 @@ get_cookie($cookie);
 
 for ($j = 0; $j < 3; $j++) {
   for ($i = 0; $i < 40; $i++) {
-    $url = getenv('URL_010') . ($i + 1);
+    $url = getenv('URL_020') . ($i + 1);
     $file_name = '/tmp/' . hash('sha512', $url);
     if (file_exists($file_name)) {
       continue;
@@ -46,7 +46,7 @@ for ($j = 0; $j < 3; $j++) {
 
     error_log('size : ' . strlen($res));
 
-    if (strlen($res) > 100000) {
+    if (strlen($res) > 50000) {
       file_put_contents($file_name, $res);
     } else {
       sleep(1);
@@ -63,7 +63,7 @@ $time_finish = time();
 error_log("FINISH " . ($time_finish - $time_start) . 's');
 
 function get_cookie($cookie_) {
-  $url = 'https://' . parse_url(getenv('URL_010'))['host'] . '/' . '?' . time();
+  $url = 'https://' . parse_url(getenv('URL_020'))['host'] . '/' . '?' . time();
   error_log($url);
 
   $ch = curl_init();
