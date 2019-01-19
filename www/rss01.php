@@ -44,7 +44,7 @@ $list_res = [];
 for ($j = 0; $j < 2; $j++) {
   $mh = curl_multi_init();
   $list_ch = [];
-  for ($i = 0; $i < 100; $i++) {
+  for ($i = 0; $i < 3; $i++) {
     $url = getenv('URL_010') . ($i + 1);
     if (array_key_exists($url, $list_res)) {
       continue;
@@ -109,6 +109,17 @@ for ($j = 0; $j < 2; $j++) {
 }
 
 unlink($cookie);
+
+for ($i = 0; $i < 100; $i++) {
+  $url = getenv('URL_010') . ($i + 1);
+  if (array_key_exists($url, $list_res)) {
+    continue;
+  }
+  $file_name = '/tmp/' . hash('sha512', $url);
+  if (file_exists($file_name)) {
+    $list_res[$url] = file_get_contents($file_name);
+  }
+}
 
 error_log('count : ' . count($list_res));
 $items = [];
