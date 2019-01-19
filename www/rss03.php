@@ -164,7 +164,7 @@ if (count($items) > 0) {
   $rc = ftp_nlist($ftp_link_id, '.');
   error_log(print_r($rc, true));
 
-  $rc = ftp_put($ftp_link_id, getenv('RSS_020_FILE'), '/tmp/' . getenv('RSS_030_FILE'), FTP_ASCII);
+  $rc = ftp_put($ftp_link_id, getenv('RSS_030_FILE'), '/tmp/' . getenv('RSS_030_FILE'), FTP_ASCII);
   error_log('ftp_put : ' . $rc);
 
   $rc = ftp_close($ftp_link_id);
