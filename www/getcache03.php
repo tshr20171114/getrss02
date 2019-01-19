@@ -100,7 +100,7 @@ for ($j = 0; $j < 2; $j++) {
   curl_multi_close($mh);
 }
 
-unlink($cookie);
+$restart_flag = false;
 
 error_log('count : ' . count($list_res));
 $items = [];
@@ -147,9 +147,19 @@ foreach ($list_res as $res) {
       error_log($http_code);
       if ($http_code == '200') {
         file_put_contents($file_name, $res);
+        $restart_flag = true;
       }
     }
   }
+}
+
+unlink($cookie);
+if ($restart_flag) {
+  $ch = curl_init();
+  $url = $url = 'https://' . getenv('TARGET_APP_NAME') . '.herokuapp.com/rss03.php';
+  $rc = curl_setopt_array($ch, [CURLOPT_URL => $url, CURLOPT_TIMEOUT => 2]);
+  $res = curl_exec($ch);
+  curl_close($ch);
 }
 
 $time_finish = time();
