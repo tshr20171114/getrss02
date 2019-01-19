@@ -127,7 +127,7 @@ foreach ($list_res as $res) {
         continue;
       }
       $title = $match[4] . ' ' . $match[1];
-      $link = $match[0];
+      $link = getenv('URL_021'). $match[0];
       $thumbnail = 'https:' . $match[2];
       $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/></item>";
     }
