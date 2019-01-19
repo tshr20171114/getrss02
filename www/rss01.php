@@ -107,6 +107,8 @@ for ($j = 0; $j < 2; $j++) {
   curl_multi_close($mh);
 }
 
+unlink($cookie);
+
 error_log('count : ' . count($list_res));
 $items = [];
 foreach ($list_res as $res) {
