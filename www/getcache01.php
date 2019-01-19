@@ -51,6 +51,8 @@ for ($i = 0; $i < 40; $i++) {
   }
 }
 
+error_log(file_get_contents($cookie));
+
 unlink($cookie);
 
 $time_finish = time();
