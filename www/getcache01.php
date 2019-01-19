@@ -51,5 +51,7 @@ for ($i = 0; $i < 40; $i++) {
   }
 }
 
+unlink($cookie);
+
 $time_finish = time();
 error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
