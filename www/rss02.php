@@ -114,9 +114,13 @@ error_log('count : ' . count($list_res));
 $items = [];
 foreach ($list_res as $res) {
   $tmp1 = explode('<hr />', $res);
-  $tmp1 = explode('<div class="itemTitle">', $tmp1[0]);
-  array_shift($tmp1);
+  $list = explode('<div class="itemTitle">', $tmp1[0]);
+  array_shift($list);
   error_log(print_r($tmp1, true));
+  foreach ($list as $item) {
+    $rc = preg_match('/(.+?)<\/div>.+?<img src="(.+?)"/s', $item, $match);
+    error_log(print_r($match, true));
+  }
 }
 
 $items = array_unique($items);
