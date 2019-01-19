@@ -69,7 +69,7 @@ function get_cookie($cookie_) {
   $ch = curl_init();
 
   $options = [
-          CURLOPT_URL => , $url,
+          CURLOPT_URL => $url,
           CURLOPT_USERAGENT => getenv('USER_AGENT'),
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => 'gzip, deflate, br',
