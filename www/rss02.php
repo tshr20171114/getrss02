@@ -162,13 +162,7 @@ $xml_root_text = <<< __HEREDOC__
 __HEREDOC__;
 
 $tmp = str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text);
-/*
-$tmp = str_replace('&hellip;', '', $tmp);
-$tmp = str_replace('&laquo;', '', $tmp);
-$tmp = str_replace('&raquo;', '', $tmp);
-$tmp = str_replace('&hearts;', '', $tmp);
-$tmp = str_replace('&rdquo;', '', $tmp);
-*/
+$tmp = str_replace('❗', '', $tmp);
 file_put_contents('/tmp/' . getenv('RSS_020_FILE'), $tmp);
 $rc = filesize('/tmp/' . getenv('RSS_020_FILE'));
 error_log('file size : ' . $rc);
