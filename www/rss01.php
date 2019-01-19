@@ -25,6 +25,7 @@ $options = [
             'Upgrade-Insecure-Requests: 1',
             ],
         CURLOPT_COOKIEJAR => $cookie,
+        CURLOPT_COOKIEFILE => $cookie,
 ];
 
 foreach ($options as $key => $value) {
