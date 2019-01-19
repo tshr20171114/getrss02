@@ -141,6 +141,9 @@ foreach ($list_res as $res) {
       $title = preg_replace('/&.+?;/', '', $title);
       $link = getenv('URL_021'). $match[0];
       $thumbnail = 'https:' . $match[2];
+      if (strpos($thumbnail, 'noimage') > 0) {
+        continue;
+      }
       $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/></item>";
     }
   }
@@ -162,9 +165,11 @@ $xml_root_text = <<< __HEREDOC__
 __HEREDOC__;
 
 $tmp = str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text);
+/*
 $tmp = str_replace('❗', '', $tmp);
 $tmp = str_replace('♡', '', $tmp);
 $tmp = str_replace('❤', '', $tmp);
+*/
 file_put_contents('/tmp/' . getenv('RSS_020_FILE'), $tmp);
 $rc = filesize('/tmp/' . getenv('RSS_020_FILE'));
 error_log('file size : ' . $rc);
