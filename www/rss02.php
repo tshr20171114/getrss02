@@ -122,7 +122,10 @@ foreach ($list_res as $res) {
     if ($rc == 1 && strpos($match[6], '1') > 0) {
       array_shift($match);
       error_log(print_r($match, true));
-      $time = $match[3];
+      $time = (int)$match[3];
+      if ($time < 40) {
+        continue;
+      }
       $title = $match[4] . ' ' . $match[1];
       $link = $match[0];
       $thumbnail = 'https:' . $match[2];
