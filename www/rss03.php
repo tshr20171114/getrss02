@@ -10,7 +10,7 @@ $cookie = $tmpfname = tempnam("/tmp", time());
 $ch = curl_init();
 
 $options = [
-  CURLOPT_URL => 'https://' . parse_url(getenv('URL_030'))['host'],
+  CURLOPT_URL => 'http://' . parse_url(getenv('URL_030'))['host'],
   CURLOPT_USERAGENT => getenv('USER_AGENT'),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => 'gzip, deflate, br',
@@ -116,11 +116,12 @@ foreach ($list_res as $res) {
     if ($rc == 1) {
       array_shift($match);
       error_log(print_r($match, true));
-      /*
-      $time = (int)$match[3];
-      if ($time < 40) {
+      $page = (int)$match[2];
+      $file_name = '/tmp/' . hash('sha512', 'http://' . parse_url(getenv('URL_030'))['host'] . $match[0]);
+      if ($page < 50 || !file_exists($file_name)) {
         continue;
       }
+      /*
       $title = $match[4] . ' ' . $match[1];
       $title = preg_replace('/&.+?;/', '', $title);
       $link = getenv('URL_021'). $match[0];
