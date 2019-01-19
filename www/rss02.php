@@ -44,7 +44,7 @@ $list_res = [];
 for ($j = 0; $j < 2; $j++) {
   $mh = curl_multi_init();
   $list_ch = [];
-  for ($i = 0; $i < 10; $i++) {
+  for ($i = 0; $i < 1; $i++) {
     $url = getenv('URL_020') . ($i + 1);
     if (array_key_exists($url, $list_res)) {
       continue;
@@ -113,6 +113,8 @@ unlink($cookie);
 error_log('count : ' . count($list_res));
 $items = [];
 foreach ($list_res as $res) {
+  $tmp1 = explode('<div class="itemTitle">', $res);
+  error_log(print_r($tmp1, true));
 }
 
 $items = array_unique($items);
