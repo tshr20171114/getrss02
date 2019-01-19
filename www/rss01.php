@@ -185,6 +185,26 @@ if (count($items) > 0) {
 
   $rc = ftp_close($ftp_link_id);
   error_log('ftp_close : ' . $rc);
+  
+  $url = 'https://pubsubhubbub.appspot.com/';
+  $post_data = ['hub.mode' => 'publish',
+                'hub.url' => 'https://' . getenv('FC2_FTP_SERVER') . '/'. getenv('RSS_010_FILE')
+               ];
+  $options = [
+    CURLOPT_URL => $url,
+    CURLOPT_USERAGENT => getenv('USER_AGENT'),
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_FOLLOWLOCATION => 1,
+    CURLOPT_MAXREDIRS => 3,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => http_build_query($post_data),
+  ];
+  $ch = curl_init();
+  $rc = curl_setopt_array($ch, $options);
+  error_log('curl_setopt_array : ' . $rc);
+  $res = curl_exec($ch);
+  curl_close($ch);
 }
 
 $api_key = getenv('HEROKU_API_KEY');
