@@ -3,6 +3,8 @@
 $time_start = time();
 error_log("START ${requesturi} " . date('Y/m/d H:i:s', $time_start));
 
+$cookie = $tmpfname = tempnam("/tmp", time());
+
 for ($i = 0; $i < 40; $i++) {
   $url = getenv('URL_010') . ($i + 1);
   $file_name = '/tmp/' . hash('sha512', $url);
@@ -27,7 +29,9 @@ for ($i = 0; $i < 40; $i++) {
               'Connection: keep-alive',
               'DNT: 1',
               'Upgrade-Insecure-Requests: 1',
-              ]
+              ],
+          CURLOPT_COOKIEJAR => $cookie,
+          CURLOPT_COOKIEFILE, => $cookie,
   ];
   
   foreach ($options as $key => $value) {
