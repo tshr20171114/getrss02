@@ -109,13 +109,14 @@ $items = [];
 foreach ($list_res as $res) {
   $list = explode('<div class="list" id="', $res);
   array_shift($list);
-  error_log(print_r($list, true));
-  /*
+  // error_log(print_r($list, true));
+
   foreach ($list as $item) {
-    $rc = preg_match('/.+?<a href="(.+?)" title="(.+?)".+?<img src="(.+?)".+?<span class="movieTime">(\d+).+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
-    if ($rc == 1 && strpos($match[6], '1') > 0) {
+    $rc = preg_match('/<h3><a href="(.+?)".+?>(.+?)<.+?<dl>.+?<dd>(\d+)</s', $item, $match);
+    if ($rc == 1) {
       array_shift($match);
-      // error_log(print_r($match, true));
+      error_log(print_r($match, true));
+      /*
       $time = (int)$match[3];
       if ($time < 40) {
         continue;
@@ -128,9 +129,9 @@ foreach ($list_res as $res) {
         continue;
       }
       $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/></item>";
+      */
     }
   }
-  */
 }
 
 /*
