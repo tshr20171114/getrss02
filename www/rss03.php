@@ -112,37 +112,34 @@ foreach ($list_res as $res) {
   // error_log(print_r($list, true));
 
   foreach ($list as $item) {
-    $rc = preg_match('/<h3><a href="(.+?)".+?>(.+?)<.+?<dl>.+?<dd>(\d+)\w</s', $item, $match);
+    $rc = preg_match('/ <img src="(.+?)".+?<h3><a href="(.+?)".+?>(.+?)<.+?<dl>.+?<dd>(\d+)\w</s', $item, $match);
     if ($rc == 1) {
       array_shift($match);
       error_log(print_r($match, true));
-      $page = (int)$match[2];
-      $file_name = '/tmp/' . hash('sha512', 'http://' . parse_url(getenv('URL_030'))['host'] . $match[0]);
-      if ($page < 50 || !file_exists($file_name)) {
+      $page = (int)$match[3];
+      if ($page < 50) {
         continue;
       }
-      /*
-      $title = $match[4] . ' ' . $match[1];
-      $title = preg_replace('/&.+?;/', '', $title);
-      $link = getenv('URL_021'). $match[0];
-      $thumbnail = 'https:' . $match[2];
+
+      $title = $match[3];
+      $link = $url = 'http://' . parse_url(getenv('URL_030'))['host'] . $match[0];
+      $link2 = str_replace('/detail/', '/detail/download_zip/', $link);
+      $thumbnail = $match[0];
       if (strpos($thumbnail, 'noimage') > 0) {
         continue;
       }
-      $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/></item>";
-      */
+      $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;${page}&lt;a href='${link2}'&gt;_zip&lt;/a&gt;</description><pubDate/></item>";
     }
   }
 }
 
-/*
 $items = array_unique($items);
 
 $xml_root_text = <<< __HEREDOC__
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>rss02</title>
+    <title>rss03</title>
     <link>http://www.yahoo.co.jp</link>
     <description>none</description>
     <language>ja</language>
@@ -152,8 +149,8 @@ $xml_root_text = <<< __HEREDOC__
 __HEREDOC__;
 
 $tmp = str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text);
-file_put_contents('/tmp/' . getenv('RSS_020_FILE'), $tmp);
-$rc = filesize('/tmp/' . getenv('RSS_020_FILE'));
+file_put_contents('/tmp/' . getenv('RSS_030_FILE'), $tmp);
+$rc = filesize('/tmp/' . getenv('RSS_030_FILE'));
 error_log('file size : ' . $rc);
 
 if (count($items) > 0) {
@@ -167,7 +164,7 @@ if (count($items) > 0) {
   $rc = ftp_nlist($ftp_link_id, '.');
   error_log(print_r($rc, true));
 
-  $rc = ftp_put($ftp_link_id, getenv('RSS_020_FILE'), '/tmp/' . getenv('RSS_020_FILE'), FTP_ASCII);
+  $rc = ftp_put($ftp_link_id, getenv('RSS_020_FILE'), '/tmp/' . getenv('RSS_030_FILE'), FTP_ASCII);
   error_log('ftp_put : ' . $rc);
 
   $rc = ftp_close($ftp_link_id);
@@ -175,7 +172,7 @@ if (count($items) > 0) {
   
   $url = 'https://pubsubhubbub.appspot.com/';
   $post_data = ['hub.mode' => 'publish',
-                'hub.url' => 'https://' . getenv('FC2_FTP_SERVER') . '/'. getenv('RSS_020_FILE')
+                'hub.url' => 'https://' . getenv('FC2_FTP_SERVER') . '/'. getenv('RSS_030_FILE')
                ];
   $options = [
     CURLOPT_URL => $url,
@@ -202,11 +199,11 @@ $xml_text = <<< __HEREDOC__
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>rss02trigger</title>
+    <title>rss03trigger</title>
     <link>https://www.yahoo.com/</link>
     <description>none</description>
     <language>ja</language>
-    <item><title>rss02trigger</title><link>https://www.yahoo.com/</link><description>__DESCRIPTION__</description><pubDate/></item>
+    <item><title>rss03trigger</title><link>https://www.yahoo.com/</link><description>__DESCRIPTION__</description><pubDate/></item>
   </channel>
 </rss>
 __HEREDOC__;
@@ -214,7 +211,6 @@ __HEREDOC__;
 $xml_text = str_replace('__DESCRIPTION__', 'count : ' . count($items) . date(' Y/m/d H:i', strtotime('+9 hours')), $xml_text);
 
 echo $xml_text;
-*/
 
 $time_finish = time();
 error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
