@@ -119,7 +119,10 @@ foreach ($list_res as $res) {
   // error_log(print_r($tmp1, true));
   foreach ($list as $item) {
     $rc = preg_match('/.+?<a href="(.+?)" title="(.+?)".+?<img src="(.+?)".+?<span class="movieTime">(.+?)<.+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
-    error_log(print_r($match, true));
+    if ($rc == 1) {
+      array_shift($match);
+      error_log(print_r($match, true));
+    }
   }
 }
 
