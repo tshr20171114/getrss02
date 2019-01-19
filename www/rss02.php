@@ -113,7 +113,8 @@ unlink($cookie);
 error_log('count : ' . count($list_res));
 $items = [];
 foreach ($list_res as $res) {
-  $tmp1 = explode('<div class="itemTitle">', $res);
+  $tmp1 = explode('<hr />', $res);
+  $tmp1 = explode('<div class="itemTitle">', $tmp1[0]);
   error_log(print_r($tmp1, true));
 }
 
