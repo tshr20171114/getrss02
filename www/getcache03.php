@@ -146,7 +146,7 @@ foreach ($list_res as $res) {
       curl_close($ch);
       error_log($http_code);
       if ($http_code == '200') {
-        file_put_contents($file_name);
+        file_put_contents($file_name, $res);
       }
     }
   }
