@@ -205,6 +205,7 @@ if (count($items) > 0) {
   error_log('curl_setopt_array : ' . $rc);
   $res = curl_exec($ch);
   curl_close($ch);
+  error_log($res);
 }
 
 $api_key = getenv('HEROKU_API_KEY');
