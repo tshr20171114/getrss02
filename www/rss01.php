@@ -36,6 +36,7 @@ $res = curl_exec($ch);
 
 curl_close($ch);
 
+error_log(strlen($res));
 error_log(file_get_contents($cookie));
 
 $list_res = [];
