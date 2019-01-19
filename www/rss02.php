@@ -138,6 +138,7 @@ foreach ($list_res as $res) {
         continue;
       }
       $title = $match[4] . ' ' . $match[1];
+      $title = preg_replace('/&.+?;/', '', $title);
       $link = getenv('URL_021'). $match[0];
       $thumbnail = 'https:' . $match[2];
       $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/></item>";
@@ -168,13 +169,6 @@ $tmp = str_replace('&raquo;', '', $tmp);
 $tmp = str_replace('&hearts;', '', $tmp);
 $tmp = str_replace('&rdquo;', '', $tmp);
 */
-for(;;) {
-  $length = strlen($tmp);
-  $tmp = preg_replace('/<title>.*?(&.+?;).*?<\/title>/s', '', $tmp);
-  if ($length === strlen($tmp)) {
-    break;
-  }
-}
 file_put_contents('/tmp/' . getenv('RSS_020_FILE'), $tmp);
 $rc = filesize('/tmp/' . getenv('RSS_020_FILE'));
 error_log('file size : ' . $rc);
