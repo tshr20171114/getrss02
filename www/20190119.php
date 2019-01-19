@@ -5,12 +5,12 @@ error_log("START ${requesturi} " . date('Y/m/d H:i:s', $time_start));
 
 $cookie = $tmpfname = tempnam("/tmp", time());
 
-error_log(print_r(parse_url(getenv('URL_010')), true));
+error_log(print_r(parse_url(getenv('URL_020')), true));
 
 $ch = curl_init();
 
 $options = [
-        CURLOPT_URL => 'https://' . parse_url(getenv('URL_010'))['host'],
+        CURLOPT_URL => 'https://' . parse_url(getenv('URL_020'))['host'],
         CURLOPT_USERAGENT => getenv('USER_AGENT'),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => 'gzip, deflate, br',
@@ -39,7 +39,7 @@ curl_close($ch);
 error_log(file_get_contents($cookie));
 
 for ($i = 0; $i < 100; $i++) {
-  $url = getenv('URL_010') . ($i + 1);
+  $url = getenv('URL_020') . ($i + 1);
   $file_name = '/tmp/' . hash('sha512', $url);
   if (file_exists($file_name)) {
     continue;
@@ -76,7 +76,7 @@ for ($i = 0; $i < 100; $i++) {
 
   error_log('size : ' . strlen($res));
 
-  if (strlen($res) > 100000) {
+  if (strlen($res) > 50000) {
     file_put_contents($file_name, $res);
   } else {
     sleep(1);
