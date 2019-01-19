@@ -41,7 +41,7 @@ error_log(file_get_contents($cookie));
 
 $list_res = [];
 
-for ($j = 0; $j < 2; $j++) {
+for ($j = 0; $j < 50; $j++) {
   $mh = curl_multi_init();
   $list_ch = [];
   for ($i = 0; $i < 1; $i++) {
