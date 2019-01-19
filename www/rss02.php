@@ -10,22 +10,22 @@ $cookie = $tmpfname = tempnam("/tmp", time());
 $ch = curl_init();
 
 $options = [
-        CURLOPT_URL => 'https://' . parse_url(getenv('URL_020'))['host'],
-        CURLOPT_USERAGENT => getenv('USER_AGENT'),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => 'gzip, deflate, br',
-        CURLOPT_FOLLOWLOCATION => 1,
-        CURLOPT_MAXREDIRS => 3,
-        CURLOPT_HTTPHEADER => [
-            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
-            'Cache-Control: no-cache',
-            'Connection: keep-alive',
-            'DNT: 1',
-            'Upgrade-Insecure-Requests: 1',
-            ],
-        CURLOPT_COOKIEJAR => $cookie,
-        CURLOPT_COOKIEFILE => $cookie,
+  CURLOPT_URL => 'https://' . parse_url(getenv('URL_020'))['host'],
+  CURLOPT_USERAGENT => getenv('USER_AGENT'),
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => 'gzip, deflate, br',
+  CURLOPT_FOLLOWLOCATION => 1,
+  CURLOPT_MAXREDIRS => 3,
+  CURLOPT_HTTPHEADER => [
+    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+    'Cache-Control: no-cache',
+    'Connection: keep-alive',
+    'DNT: 1',
+    'Upgrade-Insecure-Requests: 1',
+    ],
+  CURLOPT_COOKIEJAR => $cookie,
+  CURLOPT_COOKIEFILE => $cookie,
 ];
 
 foreach ($options as $key => $value) {
@@ -54,21 +54,21 @@ for ($j = 0; $j < 2; $j++) {
     $ch = curl_init();
 
     $options = [
-            CURLOPT_URL => $url,
-            CURLOPT_USERAGENT => getenv('USER_AGENT'),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_FOLLOWLOCATION => 1,
-            CURLOPT_MAXREDIRS => 3,
-            CURLOPT_HTTPHEADER => [
-                'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
-                'Cache-Control: no-cache',
-                'Connection: keep-alive',
-                'DNT: 1',
-                'Upgrade-Insecure-Requests: 1',
-                ],
-            CURLOPT_COOKIEFILE => $cookie,
+      CURLOPT_URL => $url,
+      CURLOPT_USERAGENT => getenv('USER_AGENT'),
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_FOLLOWLOCATION => 1,
+      CURLOPT_MAXREDIRS => 3,
+      CURLOPT_HTTPHEADER => [
+        'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+        'Cache-Control: no-cache',
+        'Connection: keep-alive',
+        'DNT: 1',
+        'Upgrade-Insecure-Requests: 1',
+        ],
+      CURLOPT_COOKIEFILE => $cookie,
     ];
     curl_setopt_array($ch, $options);
 
@@ -81,7 +81,7 @@ for ($j = 0; $j < 2; $j++) {
 
   while ($active && $rc == CURLM_OK) {
     if (curl_multi_select($mh) == -1) {
-        usleep(1);
+      usleep(1);
     }
     $rc = curl_multi_exec($mh, $active);
   }
@@ -122,6 +122,11 @@ foreach ($list_res as $res) {
     if ($rc == 1 && strpos($match[6], '1') > 0) {
       array_shift($match);
       error_log(print_r($match, true));
+      $time = $match[3];
+      $title = $match[4] . ' ' . $match[1];
+      $link = $match[0];
+      $thumbnail = 'https:' . $match[2];
+      $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/></item>";
     }
   }
 }
@@ -141,11 +146,68 @@ $xml_root_text = <<< __HEREDOC__
 </rss>
 __HEREDOC__;
 
-/*
 file_put_contents('/tmp/' . getenv('RSS_020_FILE'), str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text));
 $rc = filesize('/tmp/' . getenv('RSS_020_FILE'));
 error_log('file size : ' . $rc);
-*/
+
+if (count($items) > 0) {
+  $ftp_link_id = ftp_connect(getenv('FC2_FTP_SERVER'));
+  $rc = ftp_login($ftp_link_id, getenv('FC2_FTP_ID'), getenv('FC2_FTP_PASSWORD'));
+  error_log('ftp_login : ' . $rc);
+
+  $rc = ftp_pasv($ftp_link_id, true);
+  error_log('ftp_pasv : ' . $rc);
+
+  $rc = ftp_nlist($ftp_link_id, '.');
+  error_log(print_r($rc, true));
+
+  $rc = ftp_put($ftp_link_id, getenv('RSS_020_FILE'), '/tmp/' . getenv('RSS_020_FILE'), FTP_ASCII);
+  error_log('ftp_put : ' . $rc);
+
+  $rc = ftp_close($ftp_link_id);
+  error_log('ftp_close : ' . $rc);
+  
+  $url = 'https://pubsubhubbub.appspot.com/';
+  $post_data = ['hub.mode' => 'publish',
+                'hub.url' => 'https://' . getenv('FC2_FTP_SERVER') . '/'. getenv('RSS_020_FILE')
+               ];
+  $options = [
+    CURLOPT_URL => $url,
+    CURLOPT_USERAGENT => getenv('USER_AGENT'),
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_FOLLOWLOCATION => 1,
+    CURLOPT_MAXREDIRS => 3,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => http_build_query($post_data),
+  ];
+  $ch = curl_init();
+  $rc = curl_setopt_array($ch, $options);
+  error_log('curl_setopt_array : ' . $rc);
+  $res = curl_exec($ch);
+  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  curl_close($ch);
+  error_log($http_code);
+}
+
+header('Content-Type: application/xml');
+
+$xml_text = <<< __HEREDOC__
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>rss02trigger</title>
+    <link>https://www.yahoo.com/</link>
+    <description>none</description>
+    <language>ja</language>
+    <item><title>rss02trigger</title><link>https://www.yahoo.com/</link><description>__DESCRIPTION__</description><pubDate/></item>
+  </channel>
+</rss>
+__HEREDOC__;
+
+$xml_text = str_replace('__DESCRIPTION__', 'count : ' . count($items) . date(' Y/m/d H:i', strtotime('+9 hours')), $xml_text);
+
+echo $xml_text;
 
 $time_finish = time();
 error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
