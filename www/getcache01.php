@@ -63,7 +63,7 @@ $time_finish = time();
 error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
 
 function get_cookie($cookie_) {
-  $url = 'https://' . parse_url(getenv('URL_010'))['host'] . '/' . '?' . time()
+  $url = 'https://' . parse_url(getenv('URL_010'))['host'] . '/' . '?' . time();
   error_log($url);
 
   $ch = curl_init();
