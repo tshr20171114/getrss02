@@ -121,7 +121,7 @@ foreach ($list_res as $res) {
     $rc = preg_match('/.+?<a href="(.+?)" title="(.+?)".+?<img src="(.+?)".+?<span class="movieTime">(\d+).+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
     if ($rc == 1 && strpos($match[6], '1') > 0) {
       array_shift($match);
-      error_log(print_r($match, true));
+      // error_log(print_r($match, true));
       $time = (int)$match[3];
       if ($time < 40) {
         continue;
