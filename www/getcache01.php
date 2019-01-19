@@ -10,7 +10,7 @@ error_log(print_r(parse_url(getenv('URL_010')), true));
 $ch = curl_init();
 
 $options = [
-        CURLOPT_URL => 'https://' . parse_url(getenv('URL_010')['host'],
+        CURLOPT_URL => 'https://' . parse_url(getenv('URL_010'))['host'],
         CURLOPT_USERAGENT => getenv('USER_AGENT'),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => 'gzip, deflate, br',
