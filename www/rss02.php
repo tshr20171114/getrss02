@@ -114,7 +114,7 @@ error_log('count : ' . count($list_res));
 $items = [];
 foreach ($list_res as $res) {
   $tmp1 = explode('<hr />', $res);
-  $list = explode('<div class="itemTitle">', $tmp1[0]);
+  $list = explode('<div class="itemInfo">', $tmp1[0]);
   array_shift($list);
   error_log(print_r($tmp1, true));
   foreach ($list as $item) {
