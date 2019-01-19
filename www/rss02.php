@@ -116,9 +116,9 @@ foreach ($list_res as $res) {
   $tmp1 = explode('<hr />', $res);
   $list = explode('<div class="itemTitle">', $tmp1[0]);
   array_shift($list);
-  error_log(print_r($tmp1, true));
+  // error_log(print_r($tmp1, true));
   foreach ($list as $item) {
-    $rc = preg_match('/.+?<a href="(.+?)" title="(.+?)".+?<span class="movieTime">(.+?)<.+?<img src="(.+?)".+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
+    $rc = preg_match('/.+?<a href="(.+?)" title="(.+?)".+?<img src="(.+?)".+?<span class="movieTime">(.+?)<.+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
     error_log(print_r($match, true));
   }
 }
