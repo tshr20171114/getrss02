@@ -10,7 +10,7 @@ $cookie = $tmpfname = tempnam("/tmp", time());
 $ch = curl_init();
 
 $options = [
-  CURLOPT_URL => 'https://' . parse_url(getenv('URL_020'))['host'],
+  CURLOPT_URL => 'https://' . parse_url(getenv('URL_030'))['host'],
   CURLOPT_USERAGENT => getenv('USER_AGENT'),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => 'gzip, deflate, br',
@@ -44,8 +44,8 @@ $list_res = [];
 for ($j = 0; $j < 2; $j++) {
   $mh = curl_multi_init();
   $list_ch = [];
-  for ($i = 0; $i < 10; $i++) {
-    $url = getenv('URL_020') . ($i + 1);
+  for ($i = 0; $i < 5; $i++) {
+    $url = getenv('URL_030') . ($i + 1);
     if (array_key_exists($url, $list_res)) {
       continue;
     }
@@ -93,6 +93,7 @@ for ($j = 0; $j < 2; $j++) {
       $file_name = '/tmp/' . hash('sha512', $url);
       $tmp = curl_multi_getcontent($ch);
       error_log('size : ' . strlen($tmp));
+      /*
       if (strlen($tmp) > 50000) {
         $list_res[$url] = $tmp;
         file_put_contents($file_name, $tmp);
@@ -101,6 +102,7 @@ for ($j = 0; $j < 2; $j++) {
       } else {
         // error_log($tmp);
       }
+      */
     }
     curl_multi_remove_handle($mh, $ch);
     curl_close($ch);
@@ -110,24 +112,13 @@ for ($j = 0; $j < 2; $j++) {
 
 unlink($cookie);
 
-for ($i = 0; $i < 100; $i++) {
-  $url = getenv('URL_020') . ($i + 1);
-  if (array_key_exists($url, $list_res)) {
-    continue;
-  }
-  $file_name = '/tmp/' . hash('sha512', $url);
-  if (file_exists($file_name)) {
-    $list_res[$url] = file_get_contents($file_name);
-  }
-}
-
 error_log('count : ' . count($list_res));
 $items = [];
 foreach ($list_res as $res) {
-  $tmp1 = explode('<hr />', $res);
-  $list = explode('<div class="itemTitle">', $tmp1[0]);
+  $list = explode('<div class="list" id="', $res);
   array_shift($list);
-  // error_log(print_r($tmp1, true));
+  error_log(print_r($tmp1, true));
+  /*
   foreach ($list as $item) {
     $rc = preg_match('/.+?<a href="(.+?)" title="(.+?)".+?<img src="(.+?)".+?<span class="movieTime">(\d+).+?<span class="proName".+?>(.+?)<.+?<span class="movieCnt".+?>(.+?)</s', $item, $match);
     if ($rc == 1 && strpos($match[6], '1') > 0) {
@@ -147,8 +138,10 @@ foreach ($list_res as $res) {
       $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/></item>";
     }
   }
+  */
 }
 
+/*
 $items = array_unique($items);
 
 $xml_root_text = <<< __HEREDOC__
@@ -227,12 +220,7 @@ __HEREDOC__;
 $xml_text = str_replace('__DESCRIPTION__', 'count : ' . count($items) . date(' Y/m/d H:i', strtotime('+9 hours')), $xml_text);
 
 echo $xml_text;
-
-$ch = curl_init();
-$url = $url = 'https://' . getenv('TARGET_APP_NAME') . '.herokuapp.com/getcache02.php';
-$rc = curl_setopt_array($ch, [CURLOPT_URL => $url, CURLOPT_TIMEOUT => 2]);
-$res = curl_exec($ch);
-curl_close($ch);
+*/
 
 $time_finish = time();
 error_log("FINISH " . date('s', $time_finish - $time_start) . 's');
