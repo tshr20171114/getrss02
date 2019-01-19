@@ -8,7 +8,7 @@ $cookie = $tmpfname = tempnam("/tmp", time());
 get_cookie($cookie);
 
 for ($j = 0; $j < 3; $j++) {
-  for ($i = 0; $i < 100; $i++) {
+  for ($i = 0; $i < (int)getenv('COUNT'); $i++) {
     $url = getenv('URL_020') . ($i + 1);
     $file_name = '/tmp/' . hash('sha512', $url);
     if (file_exists($file_name)) {
