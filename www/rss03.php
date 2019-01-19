@@ -112,7 +112,7 @@ foreach ($list_res as $res) {
   // error_log(print_r($list, true));
 
   foreach ($list as $item) {
-    $rc = preg_match('/<h3><a href="(.+?)".+?>(.+?)<.+?<dl>.+?<dd>(\d+)</s', $item, $match);
+    $rc = preg_match('/<h3><a href="(.+?)".+?>(.+?)<.+?<dl>.+?<dd>(\d+)P</s', $item, $match);
     if ($rc == 1) {
       array_shift($match);
       error_log(print_r($match, true));
