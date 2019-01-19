@@ -5,6 +5,8 @@ error_log("START ${requesturi} " . date('Y/m/d H:i:s', $time_start));
 
 $cookie = $tmpfname = tempnam("/tmp", time());
 
+error_log(print_r(parse_url(getenv('URL_010')), true));
+
 for ($i = 0; $i < 40; $i++) {
   $url = getenv('URL_010') . ($i + 1);
   $file_name = '/tmp/' . hash('sha512', $url);
