@@ -121,14 +121,14 @@ foreach ($list_res as $res) {
         continue;
       }
 
-      $title = $match[3];
-      $link = $url = 'http://' . parse_url(getenv('URL_030'))['host'] . $match[0];
+      $title = $match[2];
+      $link = $url = 'http://' . parse_url(getenv('URL_030'))['host'] . $match[1];
       $link2 = str_replace('/detail/', '/detail/download_zip/', $link);
       $thumbnail = $match[0];
       if (strpos($thumbnail, 'noimage') > 0) {
         continue;
       }
-      $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;${page}&lt;a href='${link2}'&gt;_zip&lt;/a&gt;</description><pubDate/></item>";
+      $items[] = "<item><title>${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;${page}&lt;a href='${link2}'&gt;_zip&lt;/a&gt;</description><pubDate/></item>";
     }
   }
 }
