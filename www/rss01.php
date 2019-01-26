@@ -114,7 +114,7 @@ for ($j = 0; $j < 4; $j++) {
 
 unlink($cookie);
 
-for ($i = 0; $i < 100; $i++) {
+for ($i = 0; $i < 170; $i++) {
   $url = getenv('URL_010') . ($i + 1);
   if (array_key_exists($url, $list_res)) {
     continue;
@@ -125,7 +125,7 @@ for ($i = 0; $i < 100; $i++) {
   }
 }
 
-for ($i = 0; $i < 15; $i++) {
+for ($i = 0; $i < 20; $i++) {
   $url = getenv('URL_011') . ($i + 1);
   if (array_key_exists($url, $list_res)) {
     continue;
