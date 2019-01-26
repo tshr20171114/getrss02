@@ -10,7 +10,7 @@ get_cookie($cookie);
 $restart_flag = false;
 
 for ($j = 0; $j < 6; $j++) {
-  $loop_end = $j % 2 === 0 ? 160 : 15;
+  $loop_end = $j % 2 === 0 ? 170 : 20;
   for ($i = 0; $i < $loop_end; $i++) {
     if ($j % 2 === 0) {
       $url = getenv('URL_010') . ($i + 1);
@@ -49,8 +49,13 @@ for ($j = 0; $j < 6; $j++) {
 
     $res = curl_exec($ch);
 
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
     curl_close($ch);
 
+    if ($http_code == '404') {
+      break;
+    }
     error_log('size : ' . strlen($res));
 
     if (strlen($res) > 100000) {
