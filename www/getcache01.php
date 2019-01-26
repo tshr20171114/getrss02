@@ -12,7 +12,7 @@ $restart_flag = false;
 $loop_end_404[0] = 0;
 $loop_end_404[1] = 0;
 for ($j = 0; $j < 6; $j++) {
-  $loop_end = $loop_end_404[$j % 2] === 0 ? 200 : $loop_end_404[$j % 2];
+  $loop_end = $loop_end_404[$j % 2] === 0 ? 200 : $loop_end_404[$j % 2] - 1;
   for ($i = 0; $i < $loop_end; $i++) {
     if ($j % 2 === 0) {
       $url = getenv('URL_010') . ($i + 1);
