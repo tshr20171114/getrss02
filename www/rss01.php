@@ -10,22 +10,22 @@ $cookie = $tmpfname = tempnam("/tmp", time());
 $ch = curl_init();
 
 $options = [
-        CURLOPT_URL => 'https://' . parse_url(getenv('URL_010'))['host'],
-        CURLOPT_USERAGENT => getenv('USER_AGENT'),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => 'gzip, deflate, br',
-        CURLOPT_FOLLOWLOCATION => 1,
-        CURLOPT_MAXREDIRS => 3,
-        CURLOPT_HTTPHEADER => [
-            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
-            'Cache-Control: no-cache',
-            'Connection: keep-alive',
-            'DNT: 1',
-            'Upgrade-Insecure-Requests: 1',
-            ],
-        CURLOPT_COOKIEJAR => $cookie,
-        CURLOPT_COOKIEFILE => $cookie,
+  CURLOPT_URL => 'https://' . parse_url(getenv('URL_010'))['host'],
+  CURLOPT_USERAGENT => getenv('USER_AGENT'),
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => 'gzip, deflate, br',
+  CURLOPT_FOLLOWLOCATION => 1,
+  CURLOPT_MAXREDIRS => 3,
+  CURLOPT_HTTPHEADER => [
+      'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+      'Cache-Control: no-cache',
+      'Connection: keep-alive',
+      'DNT: 1',
+      'Upgrade-Insecure-Requests: 1',
+      ],
+  CURLOPT_COOKIEJAR => $cookie,
+  CURLOPT_COOKIEFILE => $cookie,
 ];
 
 foreach ($options as $key => $value) {
@@ -54,21 +54,21 @@ for ($j = 0; $j < 2; $j++) {
     $ch = curl_init();
 
     $options = [
-            CURLOPT_URL => $url,
-            CURLOPT_USERAGENT => getenv('USER_AGENT'),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_FOLLOWLOCATION => 1,
-            CURLOPT_MAXREDIRS => 3,
-            CURLOPT_HTTPHEADER => [
-                'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
-                'Cache-Control: no-cache',
-                'Connection: keep-alive',
-                'DNT: 1',
-                'Upgrade-Insecure-Requests: 1',
-                ],
-            CURLOPT_COOKIEFILE => $cookie,
+      CURLOPT_URL => $url,
+      CURLOPT_USERAGENT => getenv('USER_AGENT'),
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_FOLLOWLOCATION => 1,
+      CURLOPT_MAXREDIRS => 3,
+      CURLOPT_HTTPHEADER => [
+          'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+          'Cache-Control: no-cache',
+          'Connection: keep-alive',
+          'DNT: 1',
+          'Upgrade-Insecure-Requests: 1',
+          ],
+      CURLOPT_COOKIEFILE => $cookie,
     ];
     curl_setopt_array($ch, $options);
 
@@ -186,6 +186,7 @@ if (count($items) > 0) {
   $rc = ftp_close($ftp_link_id);
   error_log('ftp_close : ' . $rc);
   
+  /*
   $url = 'https://pubsubhubbub.appspot.com/';
   $post_data = ['hub.mode' => 'publish',
                 'hub.url' => 'https://' . getenv('FC2_FTP_SERVER') . '/'. getenv('RSS_010_FILE')
@@ -208,22 +209,23 @@ if (count($items) > 0) {
   curl_close($ch);
   error_log($http_code);
   error_log($res);
+  */
 }
 
 $api_key = getenv('HEROKU_API_KEY');
 $url = 'https://api.heroku.com/account';
 
 $options = [
-    CURLOPT_URL => $url,
-    CURLOPT_USERAGENT => getenv('USER_AGENT'),
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_FOLLOWLOCATION => 1,
-    CURLOPT_MAXREDIRS => 3,
-    CURLOPT_HTTPHEADER => [
-        'Accept: application/vnd.heroku+json; version=3',
-        "Authorization: Bearer ${api_key}",
-        ]
+  CURLOPT_URL => $url,
+  CURLOPT_USERAGENT => getenv('USER_AGENT'),
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_FOLLOWLOCATION => 1,
+  CURLOPT_MAXREDIRS => 3,
+  CURLOPT_HTTPHEADER => [
+      'Accept: application/vnd.heroku+json; version=3',
+      "Authorization: Bearer ${api_key}",
+      ]
 ];
 
 $ch = curl_init();
@@ -240,16 +242,16 @@ $account = explode('@', $data['email'])[0];
 $url = "https://api.heroku.com/accounts/${data['id']}/actions/get-quota";
 
 $options = [
-    CURLOPT_URL => $url,
-    CURLOPT_USERAGENT => getenv('USER_AGENT'),
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_FOLLOWLOCATION => 1,
-    CURLOPT_MAXREDIRS => 3,
-    CURLOPT_HTTPHEADER => [
-        'Accept: application/vnd.heroku+json; version=3.account-quotas',
-        "Authorization: Bearer ${api_key}",
-        ]
+  CURLOPT_URL => $url,
+  CURLOPT_USERAGENT => getenv('USER_AGENT'),
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_FOLLOWLOCATION => 1,
+  CURLOPT_MAXREDIRS => 3,
+  CURLOPT_HTTPHEADER => [
+      'Accept: application/vnd.heroku+json; version=3.account-quotas',
+      "Authorization: Bearer ${api_key}",
+      ]
 ];
 
 $ch = curl_init();
