@@ -186,8 +186,7 @@ if (count($items) > 0) {
   $rc = ftp_close($ftp_link_id);
   error_log('ftp_close : ' . $rc);
   
-  /*
-  $url = 'https://pubsubhubbub.appspot.com/';
+  $url = 'inoreader.superfeedr.com';
   $post_data = ['hub.mode' => 'publish',
                 'hub.url' => 'https://' . getenv('FC2_FTP_SERVER') . '/'. getenv('RSS_010_FILE')
                ];
@@ -209,7 +208,6 @@ if (count($items) > 0) {
   curl_close($ch);
   error_log($http_code);
   error_log($res);
-  */
 }
 
 $api_key = getenv('HEROKU_API_KEY');
