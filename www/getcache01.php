@@ -9,9 +9,14 @@ get_cookie($cookie);
 
 $restart_flag = false;
 
-for ($j = 0; $j < 3; $j++) {
-  for ($i = 0; $i < 40; $i++) {
-    $url = getenv('URL_010') . ($i + 1);
+for ($j = 0; $j < 6; $j++) {
+  $loop_end = $j % 2 === 0 ? 40 : 15;
+  for ($i = 0; $i < $loop_end; $i++) {
+    if ($j % 2 === 0) {
+      $url = getenv('URL_010') . ($i + 1);
+    } else {
+      $url = getenv('URL_011') . ($i + 1);
+    }
     $file_name = '/tmp/' . hash('sha512', $url);
     if (file_exists($file_name)) {
       continue;
