@@ -186,6 +186,7 @@ if (count($items) > 0) {
   $rc = ftp_close($ftp_link_id);
   error_log('ftp_close : ' . $rc);
   
+  /*
   $url = 'https://pubsubhubbub.appspot.com/';
   $post_data = ['hub.mode' => 'publish',
                 'hub.url' => 'https://' . getenv('FC2_FTP_SERVER') . '/'. getenv('RSS_020_FILE')
@@ -207,6 +208,7 @@ if (count($items) > 0) {
   $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
   curl_close($ch);
   error_log($http_code);
+  */
 }
 
 header('Content-Type: application/xml');
