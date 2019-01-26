@@ -45,7 +45,7 @@ for ($j = 0; $j < 2; $j++) {
   $mh = curl_multi_init();
   $list_ch = [];
   for ($i = 0; $i < 3; $i++) {
-    $url = getenv('URL_010') . ($i + 1);
+    $url = getenv('URL_011') . ($i + 1);
     if (array_key_exists($url, $list_res)) {
       continue;
     }
