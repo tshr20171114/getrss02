@@ -9,8 +9,13 @@ get_cookie($cookie);
 
 $restart_flag = false;
 
+$loop_end_404[0] = 0;
+$loop_end_404[1] = 0;
 for ($j = 0; $j < 6; $j++) {
   $loop_end = $j % 2 === 0 ? 170 : 20;
+  if ($loop_end_404[$j % 2] != 0) {
+    $loop_end = $loop_end_404[$j % 2] - 1;
+  }
   for ($i = 0; $i < $loop_end; $i++) {
     if ($j % 2 === 0) {
       $url = getenv('URL_010') . ($i + 1);
@@ -54,6 +59,7 @@ for ($j = 0; $j < 6; $j++) {
     curl_close($ch);
 
     if ($http_code == '404') {
+      $loop_end_404[$j % 2] = $j;
       break;
     }
     error_log('size : ' . strlen($res));
