@@ -10,7 +10,7 @@ get_cookie($cookie);
 $restart_flag = false;
 
 for ($j = 0; $j < 6; $j++) {
-  $loop_end = $j % 2 === 0 ? 40 : 15;
+  $loop_end = $j % 2 === 0 ? 50 : 15;
   for ($i = 0; $i < $loop_end; $i++) {
     if ($j % 2 === 0) {
       $url = getenv('URL_010') . ($i + 1);
