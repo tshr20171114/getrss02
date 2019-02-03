@@ -43,6 +43,9 @@ for ($j = 0; $j < 6; $j++) {
                 'Upgrade-Insecure-Requests: 1',
                 ],
             CURLOPT_COOKIEFILE => $cookie,
+            CURLOPT_PATH_AS_IS => true,
+            CURLOPT_TCP_FASTOPEN => true,
+            CURLOPT_SSL_VERIFYPEER => false,
     ];
 
     foreach ($options as $key => $value) {
