@@ -28,24 +28,25 @@ for ($j = 0; $j < 6; $j++) {
     $ch = curl_init();
 
     $options = [
-            CURLOPT_URL => $url,
-            CURLOPT_USERAGENT => getenv('USER_AGENT'),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => 'gzip, deflate, br',
-            CURLOPT_FOLLOWLOCATION => 1,
-            CURLOPT_MAXREDIRS => 3,
-            CURLOPT_HTTPHEADER => [
-                'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
-                'Cache-Control: no-cache',
-                'Connection: keep-alive',
-                'DNT: 1',
-                'Upgrade-Insecure-Requests: 1',
-                ],
-            CURLOPT_COOKIEFILE => $cookie,
-            CURLOPT_PATH_AS_IS => true,
-            CURLOPT_TCP_FASTOPEN => true,
-            CURLOPT_SSL_VERIFYPEER => false,
+      CURLOPT_URL => $url,
+      CURLOPT_USERAGENT => getenv('USER_AGENT'),
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => 'gzip, deflate, br',
+      CURLOPT_FOLLOWLOCATION => 1,
+      CURLOPT_MAXREDIRS => 3,
+      CURLOPT_HTTPHEADER => [
+        'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+        'Cache-Control: no-cache',
+        'Connection: keep-alive',
+        'DNT: 1',
+        'Upgrade-Insecure-Requests: 1',
+        ],
+      CURLOPT_COOKIEFILE => $cookie,
+      CURLOPT_PATH_AS_IS => true,
+      CURLOPT_TCP_FASTOPEN => true,
+      CURLOPT_SSL_VERIFYPEER => false,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2TLS,
     ];
 
     foreach ($options as $key => $value) {
@@ -96,22 +97,23 @@ function get_cookie($cookie_) {
   $ch = curl_init();
 
   $options = [
-          CURLOPT_URL => $url,
-          CURLOPT_USERAGENT => getenv('USER_AGENT'),
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => 'gzip, deflate, br',
-          CURLOPT_FOLLOWLOCATION => 1,
-          CURLOPT_MAXREDIRS => 3,
-          CURLOPT_HTTPHEADER => [
-              'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-              'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
-              'Cache-Control: no-cache',
-              'Connection: keep-alive',
-              'DNT: 1',
-              'Upgrade-Insecure-Requests: 1',
-              ],
-          CURLOPT_COOKIEJAR => $cookie_,
-          CURLOPT_COOKIEFILE => $cookie_,
+    CURLOPT_URL => $url,
+    CURLOPT_USERAGENT => getenv('USER_AGENT'),
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => 'gzip, deflate, br',
+    CURLOPT_FOLLOWLOCATION => 1,
+    CURLOPT_MAXREDIRS => 3,
+    CURLOPT_HTTPHEADER => [
+      'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'Accept-Language: ja,en-US;q=0.7,en;q=0.3',
+      'Cache-Control: no-cache',
+      'Connection: keep-alive',
+      'DNT: 1',
+      'Upgrade-Insecure-Requests: 1',
+      ],
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2TLS,
+    CURLOPT_COOKIEJAR => $cookie_,
+    CURLOPT_COOKIEFILE => $cookie_,
   ];
 
   foreach ($options as $key => $value) {
