@@ -5,7 +5,7 @@ error_log("START ${requesturi} " . date('Y/m/d H:i:s', $time_start));
 
 error_log(getenv('USER_AGENT'));
 
-$cookie = $tmpfname = tempnam("/tmp", time());
+$cookie = tempnam("/tmp", time());
 
 $ch = curl_init();
 
