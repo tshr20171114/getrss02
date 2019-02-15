@@ -3,7 +3,7 @@
 $time_start = time();
 error_log("START ${requesturi} " . date('Y/m/d H:i:s', $time_start));
 
-$cookie = $tmpfname = tempnam("/tmp", time());
+$cookie = tempnam("/tmp", time());
 
 get_cookie($cookie);
 
