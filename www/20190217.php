@@ -100,6 +100,7 @@ foreach ($list as $item) {
   $guid = hash('sha512', $link);
   $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/><guid isPermaLink='false'>${guid}</guid></item>";
 }
+$items = array_unique($items);
 
 $xml_root_text = <<< __HEREDOC__
 <?xml version="1.0" encoding="UTF-8"?>
