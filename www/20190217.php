@@ -87,7 +87,7 @@ foreach ($list as $item) {
 
   $rc = preg_match('/<var class="duration">(.+?):/s', $item, $match);
   $time = (int)$match[1];
-  if ($time < 50) {
+  if ($time < 10) {
     continue;
   }
 
