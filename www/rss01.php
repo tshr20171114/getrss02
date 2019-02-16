@@ -164,7 +164,7 @@ foreach ($list_res as $res) {
     $link = $url_parts['scheme'] . '://' . $url_parts['host'] . $match[1];
     $title = $match[2];
     $guid = hash('sha512', $link);
-    $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/><guid isPermaLink="false">${guid}</guid></item>";
+    $items[] = "<item><title>${time}min ${title}</title><link>${link}</link><description>&lt;img src='${thumbnail}'&gt;</description><pubDate/><guid isPermaLink='false'>${guid}</guid></item>";
   }
 }
 
