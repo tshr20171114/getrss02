@@ -39,6 +39,8 @@ curl_close($ch);
 
 $ch = curl_init();
 
+$url = getenv('URL_110');
+
 $options = [
   CURLOPT_URL => getenv('URL_110'),
   CURLOPT_USERAGENT => getenv('USER_AGENT'),
