@@ -24,6 +24,7 @@ $options = [
     'DNT: 1',
     'Upgrade-Insecure-Requests: 1',
     ],
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2TLS,
   CURLOPT_COOKIEJAR => $cookie,
   CURLOPT_COOKIEFILE => $cookie,
 ];
@@ -68,6 +69,7 @@ for ($j = 0; $j < 2; $j++) {
         'DNT: 1',
         'Upgrade-Insecure-Requests: 1',
         ],
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2TLS,
       CURLOPT_COOKIEFILE => $cookie,
     ];
     curl_setopt_array($ch, $options);
