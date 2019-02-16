@@ -76,6 +76,8 @@ $tmp1 = explode('<div class="pagination3">', $tmp1[1]);
 
 $list = explode('</li>', $tmp1[0]);
 
+error_log(count($list));
+
 foreach ($list as $item) {
   $rc = preg_match('/data-thumb_url = "(.+?)"/s', $item, $match);
   if ($rc === 0) {
