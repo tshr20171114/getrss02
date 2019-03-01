@@ -121,7 +121,7 @@ foreach ($list_res as $res) {
         continue;
       }
 
-      $title = $match[2];
+      $title = htmlspecialchars($match[2]);
       $link = $url = 'http://' . parse_url(getenv('URL_030'))['host'] . $match[1];
       $link2 = str_replace('/detail/', '/detail/download_zip/', $link);
       $thumbnail = $match[0];
