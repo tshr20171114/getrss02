@@ -155,6 +155,9 @@ error_log('file size : ' . $rc);
 
 if (count($items) > 0) {
   $ftp_link_id = ftp_connect(getenv('FC2_FTP_SERVER'));
+  if ($ftp_link_id == false) {
+    $ftp_link_id = ftp_connect(getenv('FC2_FTP_SERVER_ACTIVE'));
+  }
   $rc = ftp_login($ftp_link_id, getenv('FC2_FTP_ID'), getenv('FC2_FTP_PASSWORD'));
   error_log('ftp_login : ' . $rc);
 
